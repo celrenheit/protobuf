@@ -2190,7 +2190,7 @@ func (f *simpleField) getter(g *Generator, mc *msgCtx) {
 	if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		return
 	}
-	if gogoproto.IsEmbed(f.protoField) || gogoproto.IsCustomType(f.protoField) {
+	if gogoproto.IsEmbed(f.protoField) || (gogoproto.IsCustomType(f.protoField) && gogoproto.IsNullable(f.protoField)) {
 		return
 	}
 	if f.deprecated != "" {
