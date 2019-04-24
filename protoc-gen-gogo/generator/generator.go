@@ -2088,6 +2088,9 @@ func (g *Generator) getterDefault(field *descriptor.FieldDescriptorProto, goMess
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
 		return "\"\""
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		if gogoproto.IsCustomType(field) {
+			return goTypeName + "{}"
+		}
 		// This is only possible for oneof fields.
 		return "nil"
 	case descriptor.FieldDescriptorProto_TYPE_ENUM:
